@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-stone-950 text-cream font-sans;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-brand-500 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-charcoal;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-600 rounded-full;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-7 py-3.5 bg-brand-500 text-white font-sans font-medium text-sm tracking-wider uppercase rounded-none transition-all duration-300 hover:bg-brand-400 hover:shadow-[0_0_30px_rgba(200,120,32,0.4)] active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-cream/30 text-cream font-sans font-normal text-sm tracking-wider uppercase rounded-none transition-all duration-300 hover:border-brand-500 hover:text-brand-400 hover:bg-brand-500/5;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 text-cream/70 font-sans text-sm transition-all duration-200 hover:text-cream hover:bg-white/5 rounded;
+  }
+
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+
+  .glass-dark {
+    @apply bg-black/30 backdrop-blur-md border border-white/10;
+  }
+
+  .section-tag {
+    @apply text-brand-400 text-xs tracking-[0.3em] uppercase font-sans font-medium;
+  }
+
+  .section-title {
+    @apply font-display font-normal text-cream leading-tight;
+  }
+
+  .input-field {
+    @apply w-full bg-white/5 border border-white/15 text-cream placeholder-cream/30 px-4 py-3 text-sm font-sans focus:outline-none focus:border-brand-500 transition-colors duration-200;
+  }
+
+  .card-adventure {
+    @apply relative overflow-hidden cursor-pointer;
+  }
+
+  .noise-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .hero-gradient {
+    background: linear-gradient(to bottom, transparent 0%, rgba(13,12,10,0.3) 40%, rgba(13,12,10,0.85) 80%, rgba(13,12,10,1) 100%);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-300 to-brand-600;
+  }
+
+  .difficulty-easy {
+    @apply bg-forest-500/20 text-forest-300 border border-forest-500/30;
+  }
+
+  .difficulty-moderate {
+    @apply bg-brand-500/20 text-brand-300 border border-brand-500/30;
+  }
+
+  .difficulty-difficult {
+    @apply bg-red-500/20 text-red-300 border border-red-500/30;
+  }
+
+  .difficulty-extreme {
+    @apply bg-purple-500/20 text-purple-300 border border-purple-500/30;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .clip-path-hero {
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Framer motion page transitions */
+.page-wrapper {
+  min-height: 100vh;
+}
+
+/* Star field for stargazing */
+.stars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: starTwinkle var(--duration, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* Swiper / carousel dots */
+.swiper-pagination-bullet {
+  @apply !bg-brand-400 !opacity-50;
+}
+
+.swiper-pagination-bullet-active {
+  @apply !opacity-100;
+}
