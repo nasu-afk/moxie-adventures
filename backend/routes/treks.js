@@ -106,4 +106,108 @@ router.delete('/:id', authAdmin, async (req, res) => {
   }
 });
 
+// ============================================================
+// TREK IMAGES
+// ============================================================
+
+// GET images for a trek
+router.get('/:id/images', async (req, res) => {
+  try {
+    const [images] = await db.execute('SELECT * FROM trek_images WHERE trek_id = ? ORDER BY sort_order ASC, id ASC', [req.params.id]);
+    res.json({ success: true, data: images });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// ADMIN: Add image to trek
+router.post('/:id/images', authAdmin, async (req, res) => {
+  try {
+    const { image_url, caption, sort_order } = req.body;
+    if (!image_url) return res.status(400).json({ success: false, message: 'Image URL required' });
+    const [result] = await db.execute(
+      'INSERT INTO trek_images (trek_id, image_url, caption, sort_order) VALUES (?, ?, ?, ?)',
+      [req.params.id, image_url, caption || null, sort_order || 0]
+    );
+    res.status(201).json({ success: true, id: result.insertId, message: 'Image added' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// ADMIN: Update image caption/order
+router.put('/:id/images/:imageId', authAdmin, async (req, res) => {
+  try {
+    const { caption, sort_order } = req.body;
+    await db.execute('UPDATE trek_images SET caption = ?, sort_order = ? WHERE id = ? AND trek_id = ?',
+      [caption || null, sort_order || 0, req.params.imageId, req.params.id]);
+    res.json({ success: true, message: 'Image updated' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// ADMIN: Delete image
+router.delete('/:id/images/:imageId', authAdmin, async (req, res) => {
+  try {
+    await db.execute('DELETE FROM trek_images WHERE id = ? AND trek_id = ?', [req.params.imageId, req.params.id]);
+    res.json({ success: true, message: 'Image deleted' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// ============================================================
+// TREK ITINERARY
+// ============================================================
+
+// GET itinerary for a trek
+router.get('/:id/itinerary', async (req, res) => {
+  try {
+    const [days] = await db.execute('SELECT * FROM trek_itineraries WHERE trek_id = ? ORDER BY day_number ASC', [req.params.id]);
+    res.json({ success: true, data: days });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// ADMIN: Add itinerary day
+router.post('/:id/itinerary', authAdmin, async (req, res) => {
+  try {
+    const { day_number, title, description, altitude, distance, stay, meals } = req.body;
+    if (!day_number || !title) return res.status(400).json({ success: false, message: 'Day number and title required' });
+    const [result] = await db.execute(
+      'INSERT INTO trek_itineraries (trek_id, day_number, title, description, altitude, distance, stay, meals) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+      [req.params.id, day_number, title, description || null, altitude || null, distance || null, stay || null, meals || null]
+    );
+    res.status(201).json({ success: true, id: result.insertId });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// ADMIN: Update itinerary day
+router.put('/:id/itinerary/:dayId', authAdmin, async (req, res) => {
+  try {
+    const { day_number, title, description, altitude, distance, stay, meals } = req.body;
+    await db.execute(
+      'UPDATE trek_itineraries SET day_number=?, title=?, description=?, altitude=?, distance=?, stay=?, meals=? WHERE id=? AND trek_id=?',
+      [day_number, title, description || null, altitude || null, distance || null, stay || null, meals || null, req.params.dayId, req.params.id]
+    );
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// ADMIN: Delete itinerary day
+router.delete('/:id/itinerary/:dayId', authAdmin, async (req, res) => {
+  try {
+    await db.execute('DELETE FROM trek_itineraries WHERE id = ? AND trek_id = ?', [req.params.dayId, req.params.id]);
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
 module.exports = router;

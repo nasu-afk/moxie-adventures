@@ -188,23 +188,41 @@ router.get('/stats', async (req, res) => {
 // ADMIN ROUTES
 // ============================================================
 
-// Admin: Dashboard stats
+// Admin: Dashboard stats — includes both trek bookings AND event registrations
 router.get('/admin/dashboard', authAdmin, async (req, res) => {
   try {
-    const [[bookings]] = await db.execute('SELECT COUNT(*) as total, SUM(total_amount) as revenue FROM trek_bookings WHERE status != "cancelled"');
-    const [[events]] = await db.execute('SELECT COUNT(*) as total FROM events WHERE event_date >= CURDATE()');
+    const [[trekBookings]] = await db.execute('SELECT COUNT(*) as total, SUM(total_amount) as revenue FROM trek_bookings WHERE status != "cancelled"');
+    const [[eventRegs]] = await db.execute('SELECT COUNT(*) as total, SUM(total_amount) as revenue FROM event_registrations WHERE status != "cancelled"');
+    const [[upcomingEvents]] = await db.execute('SELECT COUNT(*) as total FROM events WHERE event_date >= CURDATE()');
     const [[subscribers]] = await db.execute('SELECT COUNT(*) as total FROM newsletter_subscribers WHERE is_active = 1');
     const [[treks]] = await db.execute('SELECT COUNT(*) as total FROM treks WHERE is_active = 1');
-    const [recent_bookings] = await db.execute('SELECT tb.*, t.name as trek_name FROM trek_bookings tb JOIN treks t ON tb.trek_id = t.id ORDER BY tb.created_at DESC LIMIT 10');
+
+    const totalBookings = (trekBookings.total || 0) + (eventRegs.total || 0);
+    const totalRevenue = (parseFloat(trekBookings.revenue) || 0) + (parseFloat(eventRegs.revenue) || 0);
+
+    const [recentTrekBookings] = await db.execute(
+      'SELECT tb.*, t.name as item_name, "trek" as type FROM trek_bookings tb JOIN treks t ON tb.trek_id = t.id ORDER BY tb.created_at DESC LIMIT 5'
+    );
+    const [recentEventRegs] = await db.execute(
+      'SELECT er.*, e.name as item_name, er.registration_ref as booking_ref, "event" as type FROM event_registrations er JOIN events e ON er.event_id = e.id ORDER BY er.created_at DESC LIMIT 5'
+    );
+
+    // Merge and sort by created_at
+    const recent = [...recentTrekBookings, ...recentEventRegs]
+      .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+      .slice(0, 10);
+
     res.json({
       success: true,
       data: {
-        total_bookings: bookings.total,
-        revenue: bookings.revenue || 0,
-        upcoming_events: events.total,
+        total_bookings: totalBookings,
+        trek_bookings: trekBookings.total || 0,
+        event_registrations: eventRegs.total || 0,
+        revenue: totalRevenue,
+        upcoming_events: upcomingEvents.total,
         subscribers: subscribers.total,
         active_treks: treks.total,
-        recent_bookings
+        recent_bookings: recent
       }
     });
   } catch (err) {
@@ -307,6 +325,71 @@ router.get('/admin/subscribers', authAdmin, async (req, res) => {
   try {
     const [subs] = await db.execute('SELECT * FROM newsletter_subscribers WHERE is_active = 1 ORDER BY subscribed_at DESC');
     res.json({ success: true, data: subs });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// Admin: All event registrations
+router.get('/admin/event-registrations', authAdmin, async (req, res) => {
+  try {
+    const [regs] = await db.execute(
+      `SELECT er.*, e.name as event_name, e.event_date, e.location
+       FROM event_registrations er
+       JOIN events e ON er.event_id = e.id
+       ORDER BY er.created_at DESC`
+    );
+    res.json({ success: true, data: regs });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// Admin: Update event registration status
+router.put('/admin/event-registrations/:id', authAdmin, async (req, res) => {
+  try {
+    const { status } = req.body;
+
+    // Get current registration to know previous status and participant count
+    const [rows] = await db.execute(
+      'SELECT er.*, er.event_id, er.participants, er.status as old_status FROM event_registrations er WHERE er.id = ?',
+      [req.params.id]
+    );
+    if (!rows.length) return res.status(404).json({ success: false, message: 'Registration not found' });
+
+    const reg = rows[0];
+    const oldStatus = reg.old_status;
+    const participants = parseInt(reg.participants) || 1;
+
+    // Update the status
+    await db.execute('UPDATE event_registrations SET status = ? WHERE id = ?', [status, req.params.id]);
+
+    // Adjust registered_count based on status change
+    if (oldStatus !== 'cancelled' && status === 'cancelled') {
+      // Was active, now cancelled → decrement
+      await db.execute(
+        'UPDATE events SET registered_count = GREATEST(0, registered_count - ?) WHERE id = ?',
+        [participants, reg.event_id]
+      );
+    } else if (oldStatus === 'cancelled' && status !== 'cancelled') {
+      // Was cancelled, now re-activated → increment
+      await db.execute(
+        'UPDATE events SET registered_count = registered_count + ? WHERE id = ?',
+        [participants, reg.event_id]
+      );
+    }
+
+    res.json({ success: true, message: 'Registration updated' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// Admin: All events including hidden
+router.get('/admin/events', authAdmin, async (req, res) => {
+  try {
+    const [events] = await db.execute('SELECT * FROM events ORDER BY event_date DESC');
+    res.json({ success: true, data: events });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }

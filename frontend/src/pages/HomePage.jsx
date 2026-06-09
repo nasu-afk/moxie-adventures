@@ -181,28 +181,83 @@ function ActivitiesSection() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        {ACTIVITIES.map((act, i) => (
+      {/* Row 1: Trekking (large) + Camping + Stargazing */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+        {/* Trekking - tall card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="relative group overflow-hidden cursor-pointer md:row-span-2"
+          style={{ height: '400px' }}
+        >
+          <Link to={ACTIVITIES[0].to} className="block h-full">
+            <img src={ACTIVITIES[0].img} alt={ACTIVITIES[0].title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+            <div className={`absolute inset-0 bg-gradient-to-t ${ACTIVITIES[0].color} to-transparent`} />
+            <div className="absolute inset-0 bg-stone-950/0 group-hover:bg-stone-950/20 transition-colors duration-300" />
+            <div className="absolute bottom-0 left-0 p-5">
+              <h3 className="font-display text-2xl text-cream font-light mb-1">{ACTIVITIES[0].title}</h3>
+              <p className="text-cream/60 text-xs font-sans group-hover:text-cream/80 transition-colors">{ACTIVITIES[0].desc}</p>
+            </div>
+          </Link>
+        </motion.div>
+        {/* Camping */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.08 }}
+          className="relative group overflow-hidden cursor-pointer"
+          style={{ height: '240px' }}
+        >
+          <Link to={ACTIVITIES[1].to} className="block h-full">
+            <img src={ACTIVITIES[1].img} alt={ACTIVITIES[1].title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+            <div className={`absolute inset-0 bg-gradient-to-t ${ACTIVITIES[1].color} to-transparent`} />
+            <div className="absolute inset-0 bg-stone-950/0 group-hover:bg-stone-950/20 transition-colors duration-300" />
+            <div className="absolute bottom-0 left-0 p-5">
+              <h3 className="font-display text-2xl text-cream font-light mb-1">{ACTIVITIES[1].title}</h3>
+              <p className="text-cream/60 text-xs font-sans group-hover:text-cream/80 transition-colors">{ACTIVITIES[1].desc}</p>
+            </div>
+          </Link>
+        </motion.div>
+        {/* Stargazing */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.16 }}
+          className="relative group overflow-hidden cursor-pointer"
+          style={{ height: '240px' }}
+        >
+          <Link to={ACTIVITIES[2].to} className="block h-full">
+            <img src={ACTIVITIES[2].img} alt={ACTIVITIES[2].title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+            <div className={`absolute inset-0 bg-gradient-to-t ${ACTIVITIES[2].color} to-transparent`} />
+            <div className="absolute inset-0 bg-stone-950/0 group-hover:bg-stone-950/20 transition-colors duration-300" />
+            <div className="absolute bottom-0 left-0 p-5">
+              <h3 className="font-display text-2xl text-cream font-light mb-1">{ACTIVITIES[2].title}</h3>
+              <p className="text-cream/60 text-xs font-sans group-hover:text-cream/80 transition-colors">{ACTIVITIES[2].desc}</p>
+            </div>
+          </Link>
+        </motion.div>
+      </div>
+      {/* Row 2: Spiritual Yatras + Expeditions + Outdoor Events — equal 3 cols */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        {ACTIVITIES.slice(3).map((act, i) => (
           <motion.div
             key={act.title}
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className={`relative group overflow-hidden cursor-pointer ${i === 0 || i === 5 ? 'col-span-2 md:col-span-1' : ''}`}
-            style={{ height: i === 0 ? '400px' : '240px' }}
+            transition={{ delay: (i + 3) * 0.08 }}
+            className="relative group overflow-hidden cursor-pointer"
+            style={{ height: '240px' }}
           >
             <Link to={act.to} className="block h-full">
-              <img
-                src={act.img}
-                alt={act.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                loading="lazy"
-              />
+              <img src={act.img} alt={act.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
               <div className={`absolute inset-0 bg-gradient-to-t ${act.color} to-transparent`} />
               <div className="absolute inset-0 bg-stone-950/0 group-hover:bg-stone-950/20 transition-colors duration-300" />
               <div className="absolute bottom-0 left-0 p-5">
-                <h3 className="font-display text-2xl text-cream font-400 mb-1">{act.title}</h3>
+                <h3 className="font-display text-2xl text-cream font-light mb-1">{act.title}</h3>
                 <p className="text-cream/60 text-xs font-sans group-hover:text-cream/80 transition-colors">{act.desc}</p>
               </div>
             </Link>
