@@ -1,3 +1,5 @@
+import API_BASE from '../utils/config'
+
 const RAZORPAY_KEY = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_SygJcBdUUMFhTX'
 
 function loadScript() {
@@ -20,7 +22,7 @@ export async function openRazorpay(options) {
 
   let order
   try {
-    const res = await fetch('http://localhost:5000/api/payment/create-order', {
+    const res = await fetch(API_BASE + '/api/payment/create-order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -58,9 +60,9 @@ export async function openRazorpay(options) {
     modal: {
       ondismiss: () => options.onFailure?.('Payment cancelled')
     },
-    handler: async function (response) {
+    handler: async function(response) {
       try {
-        const verifyRes = await fetch('http://localhost:5000/api/payment/verify', {
+        const verifyRes = await fetch(API_BASE + '/api/payment/verify', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

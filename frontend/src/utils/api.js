@@ -1,4 +1,6 @@
-const BASE = '/api'
+import API_BASE from './config'
+
+const BASE = API_BASE + '/api'
 
 const getHeaders = (admin = false) => {
   const token = admin

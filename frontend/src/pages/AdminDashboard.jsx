@@ -1,3 +1,4 @@
+import API_BASE from '../utils/config'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate, Routes, Route, NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
@@ -20,7 +21,7 @@ export function AdminLogin() {
     e.preventDefault()
     setState({ loading: true, error: '' })
     try {
-      const res = await fetch('http://localhost:5000/api/auth/admin/login', {
+      const res = await fetch(API_BASE + '/api/auth/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)

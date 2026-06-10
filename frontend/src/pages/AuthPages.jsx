@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useAuth } from '../context/AuthContext'
+import API_BASE from '../utils/config'
 
 export function LoginPage() {
   const [form, setForm] = useState({ email: '', password: '' })
@@ -15,9 +16,9 @@ export function LoginPage() {
     e.preventDefault()
     setState({ loading: true, error: '' })
 
-    // First try admin login
+    // Try admin login first
     try {
-      const adminRes = await fetch('http://localhost:5000/api/auth/admin/login', {
+      const adminRes = await fetch(API_BASE + '/api/auth/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)
@@ -32,7 +33,7 @@ export function LoginPage() {
 
     // Then try user login
     try {
-      const userRes = await fetch('http://localhost:5000/api/auth/login', {
+      const userRes = await fetch(API_BASE + '/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)
@@ -43,7 +44,6 @@ export function LoginPage() {
         navigate('/')
         return
       }
-
       setState({ loading: false, error: userRes.message || 'Invalid credentials' })
     } catch {
       setState({ loading: false, error: 'Something went wrong. Is the server running?' })
@@ -85,22 +85,14 @@ export function LoginPage() {
               onChange={set('password')}
               className="input-field"
             />
-            {state.error && (
-              <p className="text-red-400 text-sm">{state.error}</p>
-            )}
-            <button
-              type="submit"
-              disabled={state.loading}
-              className="btn-primary w-full justify-center"
-            >
+            {state.error && <p className="text-red-400 text-sm">{state.error}</p>}
+            <button type="submit" disabled={state.loading} className="btn-primary w-full justify-center">
               {state.loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
           <p className="text-center text-cream/40 text-sm mt-6">
             Don't have an account?{' '}
-            <Link to="/register" className="text-brand-400 hover:text-brand-300">
-              Sign up
-            </Link>
+            <Link to="/register" className="text-brand-400 hover:text-brand-300">Sign up</Link>
           </p>
         </div>
       </motion.div>
@@ -120,7 +112,7 @@ export function RegisterPage() {
     e.preventDefault()
     setState({ loading: true, error: '' })
     try {
-      const res = await fetch('http://localhost:5000/api/auth/register', {
+      const res = await fetch(API_BASE + '/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)
@@ -151,52 +143,18 @@ export function RegisterPage() {
         </div>
         <div className="glass p-8 border border-white/10">
           <form onSubmit={submit} className="space-y-4">
-            <input
-              placeholder="Full Name"
-              required
-              value={form.name}
-              onChange={set('name')}
-              className="input-field"
-            />
-            <input
-              type="email"
-              placeholder="Email Address"
-              required
-              value={form.email}
-              onChange={set('email')}
-              className="input-field"
-            />
-            <input
-              placeholder="Phone Number"
-              value={form.phone}
-              onChange={set('phone')}
-              className="input-field"
-            />
-            <input
-              type="password"
-              placeholder="Password (min. 8 characters)"
-              required
-              value={form.password}
-              onChange={set('password')}
-              className="input-field"
-              minLength={8}
-            />
-            {state.error && (
-              <p className="text-red-400 text-sm">{state.error}</p>
-            )}
-            <button
-              type="submit"
-              disabled={state.loading}
-              className="btn-primary w-full justify-center"
-            >
+            <input placeholder="Full Name" required value={form.name} onChange={set('name')} className="input-field" />
+            <input type="email" placeholder="Email Address" required value={form.email} onChange={set('email')} className="input-field" />
+            <input placeholder="Phone Number" value={form.phone} onChange={set('phone')} className="input-field" />
+            <input type="password" placeholder="Password (min. 8 characters)" required value={form.password} onChange={set('password')} className="input-field" minLength={8} />
+            {state.error && <p className="text-red-400 text-sm">{state.error}</p>}
+            <button type="submit" disabled={state.loading} className="btn-primary w-full justify-center">
               {state.loading ? 'Creating account...' : 'Create Account'}
             </button>
           </form>
           <p className="text-center text-cream/40 text-sm mt-6">
             Already have an account?{' '}
-            <Link to="/login" className="text-brand-400 hover:text-brand-300">
-              Sign in
-            </Link>
+            <Link to="/login" className="text-brand-400 hover:text-brand-300">Sign in</Link>
           </p>
         </div>
       </motion.div>
