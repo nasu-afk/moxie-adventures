@@ -92,7 +92,7 @@ export function LoginPage() {
           </form>
           <p className="text-center text-cream/40 text-sm mt-6">
             Don't have an account?{' '}
-            <Link to="/register" className="text-brand-400 hover:text-brand-300">Sign up</Link>
+            <Link to="/register" className="text-moxie-400 hover:text-moxie-300">Sign up</Link>
           </p>
         </div>
       </motion.div>
@@ -154,7 +154,7 @@ export function RegisterPage() {
           </form>
           <p className="text-center text-cream/40 text-sm mt-6">
             Already have an account?{' '}
-            <Link to="/login" className="text-brand-400 hover:text-brand-300">Sign in</Link>
+            <Link to="/login" className="text-moxie-400 hover:text-moxie-300">Sign in</Link>
           </p>
         </div>
       </motion.div>

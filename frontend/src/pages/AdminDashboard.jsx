@@ -85,12 +85,12 @@ function AdminLayout({ children }) {
           {/* Logo — click to go to homepage */}
           <Link to="/" target="_blank" rel="noreferrer" className="flex items-center gap-2.5 group mb-3">
             <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 flex-shrink-0">
-              <path d="M16 3L3 26H29L16 3Z" stroke="#c87820" strokeWidth="1.5" fill="none"/>
-              <path d="M10 26L16 14L22 26" stroke="#c87820" strokeWidth="1" fill="none" opacity="0.5"/>
+              <path d="M16 3L3 26H29L16 3Z" stroke="#4DB6AC" strokeWidth="1.5" fill="none"/>
+              <path d="M10 26L16 14L22 26" stroke="#4DB6AC" strokeWidth="1" fill="none" opacity="0.5"/>
             </svg>
             <div>
-              <span className="font-display text-base font-normal text-cream group-hover:text-brand-300 transition-colors leading-none">Moxie</span>
-              <span className="font-display text-base font-light text-brand-400 group-hover:text-brand-300 transition-colors leading-none ml-1">Adventures</span>
+              <span className="font-display text-base font-normal text-cream group-hover:text-moxie-300 transition-colors leading-none">Moxie</span>
+              <span className="font-display text-base font-light text-moxie-400 group-hover:text-moxie-300 transition-colors leading-none ml-1">Adventures</span>
             </div>
           </Link>
           <div className="flex items-center justify-between">
@@ -101,7 +101,7 @@ function AdminLayout({ children }) {
         <nav className="flex-1 py-4 px-3 space-y-0.5 overflow-y-auto">
           {NAV.map(n => (
             <NavLink key={n.to} to={n.to} end={n.end}
-              className={({ isActive }) => `flex items-center gap-3 px-3 py-2 text-sm rounded transition-colors ${isActive ? 'bg-brand-500/15 text-brand-400' : 'text-cream/50 hover:text-cream hover:bg-white/5'}`}>
+              className={({ isActive }) => `flex items-center gap-3 px-3 py-2 text-sm rounded transition-colors ${isActive ? 'bg-moxie-400/15 text-moxie-400' : 'text-cream/50 hover:text-cream hover:bg-white/5'}`}>
               <span>{n.icon}</span> {n.label}
             </NavLink>
           ))}
@@ -134,7 +134,7 @@ function Dashboard() {
   const statusColor = s => {
     if (s === 'confirmed') return 'bg-forest-500/20 text-forest-300'
     if (s === 'cancelled') return 'bg-red-500/20 text-red-300'
-    if (s === 'pending') return 'bg-brand-500/20 text-brand-300'
+    if (s === 'pending') return 'bg-moxie-400/20 text-moxie-300'
     return 'bg-white/10 text-cream/50'
   }
 
@@ -166,7 +166,7 @@ function Dashboard() {
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-cream font-sans font-medium">Recent Activity</h3>
             <div className="flex gap-3 text-xs text-cream/30">
-              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-brand-500 inline-block" />Trek Booking</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-moxie-400 inline-block" />Trek Booking</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-purple-500 inline-block" />Event Registration</span>
             </div>
           </div>
@@ -187,12 +187,12 @@ function Dashboard() {
                 {data.recent_bookings.map((b, i) => (
                   <tr key={i} className="border-t border-white/5 text-cream/70 hover:bg-white/2">
                     <td className="py-2.5 pr-4">
-                      <span className={`text-xs font-mono ${b.type === 'event' ? 'text-purple-400' : 'text-brand-400'}`}>
+                      <span className={`text-xs font-mono ${b.type === 'event' ? 'text-purple-400' : 'text-moxie-400'}`}>
                         {b.booking_ref || b.registration_ref}
                       </span>
                     </td>
                     <td className="py-2.5 pr-4">
-                      <span className={`text-xs px-2 py-0.5 ${b.type === 'event' ? 'bg-purple-500/15 text-purple-300' : 'bg-brand-500/15 text-brand-300'}`}>
+                      <span className={`text-xs px-2 py-0.5 ${b.type === 'event' ? 'bg-purple-500/15 text-purple-300' : 'bg-moxie-400/15 text-moxie-300'}`}>
                         {b.type === 'event' ? '🎟 Event' : '⛰ Trek'}
                       </span>
                     </td>
@@ -241,7 +241,7 @@ function BookingsManager() {
           <tbody>
             {bookings.map(b => (
               <tr key={b.id} className="border-b border-white/5 text-cream/70 hover:bg-white/2">
-                <td className="px-4 py-3 text-brand-400 text-xs">{b.booking_ref}</td>
+                <td className="px-4 py-3 text-moxie-400 text-xs">{b.booking_ref}</td>
                 <td className="px-4 py-3">{b.name}</td>
                 <td className="px-4 py-3 text-cream/40 text-xs">{b.email}</td>
                 <td className="px-4 py-3 text-cream/60">{b.trek_name}</td>
@@ -249,7 +249,7 @@ function BookingsManager() {
                 <td className="px-4 py-3 text-center">{b.participants}</td>
                 <td className="px-4 py-3">₹{Number(b.total_amount).toLocaleString('en-IN')}</td>
                 <td className="px-4 py-3">
-                  <span className={`text-xs px-2 py-0.5 ${b.status === 'confirmed' ? 'bg-forest-500/20 text-forest-300' : b.status === 'cancelled' ? 'bg-red-500/20 text-red-300' : 'bg-brand-500/20 text-brand-300'}`}>
+                  <span className={`text-xs px-2 py-0.5 ${b.status === 'confirmed' ? 'bg-forest-500/20 text-forest-300' : b.status === 'cancelled' ? 'bg-red-500/20 text-red-300' : 'bg-moxie-400/20 text-moxie-300'}`}>
                     {b.status}
                   </span>
                 </td>
@@ -297,9 +297,9 @@ function ReviewsManager() {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="font-sans text-cream">{r.reviewer_name}</span>
-                  <div className="flex gap-0.5">{Array.from({length: r.rating}).map((_, i) => <span key={i} className="text-brand-400 text-xs">★</span>)}</div>
+                  <div className="flex gap-0.5">{Array.from({length: r.rating}).map((_, i) => <span key={i} className="text-moxie-400 text-xs">★</span>)}</div>
                   {!r.is_approved && <span className="text-xs bg-red-500/15 text-red-300 px-2 py-0.5">Pending</span>}
-                  {r.is_featured ? <span className="text-xs bg-brand-500/15 text-brand-300 px-2 py-0.5">Featured</span> : null}
+                  {r.is_featured ? <span className="text-xs bg-moxie-400/15 text-moxie-300 px-2 py-0.5">Featured</span> : null}
                 </div>
                 {r.title && <div className="text-cream/60 text-sm mb-1 font-500">{r.title}</div>}
                 <p className="text-cream/50 text-sm">{r.body}</p>
@@ -308,7 +308,7 @@ function ReviewsManager() {
                 <button onClick={() => update(r.id, !r.is_approved, r.is_featured)} className={`text-xs px-3 py-1 border transition-colors ${r.is_approved ? 'border-red-500/30 text-red-300 hover:bg-red-500/10' : 'border-forest-500/30 text-forest-300 hover:bg-forest-500/10'}`}>
                   {r.is_approved ? 'Unapprove' : 'Approve'}
                 </button>
-                <button onClick={() => update(r.id, r.is_approved, !r.is_featured)} className={`text-xs px-3 py-1 border transition-colors ${r.is_featured ? 'border-white/20 text-cream/40' : 'border-brand-500/30 text-brand-300 hover:bg-brand-500/10'}`}>
+                <button onClick={() => update(r.id, r.is_approved, !r.is_featured)} className={`text-xs px-3 py-1 border transition-colors ${r.is_featured ? 'border-white/20 text-cream/40' : 'border-moxie-400/30 text-moxie-300 hover:bg-moxie-400/10'}`}>
                   {r.is_featured ? 'Unfeature' : 'Feature'}
                 </button>
               </div>
@@ -333,7 +333,7 @@ function ContactsManager() {
       <h1 className="font-display text-3xl text-cream mb-8">Contact Messages</h1>
       <div className="space-y-3">
         {msgs.map(m => (
-          <div key={m.id} className={`bg-stone-900 border p-5 ${!m.is_read ? 'border-brand-500/30' : 'border-white/5'}`}>
+          <div key={m.id} className={`bg-stone-900 border p-5 ${!m.is_read ? 'border-moxie-400/30' : 'border-white/5'}`}>
             <div className="flex items-start justify-between gap-4 mb-2">
               <div>
                 <span className="font-sans text-cream">{m.name}</span>
@@ -405,9 +405,9 @@ function ApplicationsManager() {
             <div className="flex items-start justify-between gap-4 mb-2">
               <div>
                 <span className="font-sans text-cream">{a.name}</span>
-                <span className="text-brand-400 text-xs ml-3">{a.position}</span>
+                <span className="text-moxie-400 text-xs ml-3">{a.position}</span>
               </div>
-              <span className={`text-xs px-2 py-0.5 ${a.status === 'new' ? 'bg-brand-500/20 text-brand-300' : a.status === 'hired' ? 'bg-forest-500/20 text-forest-300' : 'bg-white/10 text-cream/50'}`}>{a.status}</span>
+              <span className={`text-xs px-2 py-0.5 ${a.status === 'new' ? 'bg-moxie-400/20 text-moxie-300' : a.status === 'hired' ? 'bg-forest-500/20 text-forest-300' : 'bg-white/10 text-cream/50'}`}>{a.status}</span>
             </div>
             <div className="text-cream/40 text-xs mb-3">{a.email} {a.phone && `· ${a.phone}`}</div>
             {a.cover_letter && <p className="text-cream/50 text-sm line-clamp-3">{a.cover_letter}</p>}
@@ -458,7 +458,7 @@ function TrekImagesManager({ trek, onClose }) {
     setImages(imgs => imgs.filter(i => i.id !== imageId))
   }
 
-  const inputCls = 'w-full bg-white/5 border border-white/15 text-cream placeholder-cream/30 px-3 py-2 text-sm font-sans focus:outline-none focus:border-brand-500'
+  const inputCls = 'w-full bg-white/5 border border-white/15 text-cream placeholder-cream/30 px-3 py-2 text-sm font-sans focus:outline-none focus:border-moxie-400'
 
   return (
     <div className="fixed inset-0 z-50 bg-stone-950/95 overflow-y-auto">
@@ -513,8 +513,8 @@ function TrekImagesManager({ trek, onClose }) {
         </div>
 
         {/* Tip box */}
-        <div className="bg-brand-500/5 border border-brand-500/20 px-4 py-3 mb-6 text-xs text-cream/50">
-          💡 <strong className="text-cream/70">Tip:</strong> Use Unsplash URLs like <code className="text-brand-400">https://images.unsplash.com/photo-ID?w=1200</code> or any direct image link. Images appear in the trek gallery tab on the website.
+        <div className="bg-moxie-400/5 border border-moxie-400/20 px-4 py-3 mb-6 text-xs text-cream/50">
+          💡 <strong className="text-cream/70">Tip:</strong> Use Unsplash URLs like <code className="text-moxie-400">https://images.unsplash.com/photo-ID?w=1200</code> or any direct image link. Images appear in the trek gallery tab on the website.
         </div>
 
         {/* Existing Images Grid */}
@@ -643,7 +643,7 @@ function TrekItineraryManager({ trek, onClose }) {
     setDays(ds => ds.filter(d => d.id !== dayId))
   }
 
-  const inputCls = 'w-full bg-white/5 border border-white/15 text-cream placeholder-cream/30 px-3 py-2 text-sm font-sans focus:outline-none focus:border-brand-500'
+  const inputCls = 'w-full bg-white/5 border border-white/15 text-cream placeholder-cream/30 px-3 py-2 text-sm font-sans focus:outline-none focus:border-moxie-400'
 
   return (
     <div className="fixed inset-0 z-50 bg-stone-950/95 overflow-y-auto">
@@ -722,8 +722,8 @@ function TrekItineraryManager({ trek, onClose }) {
               transition={{ delay: i * 0.04 }}
               className="bg-stone-900 border border-white/5 p-4 flex items-start gap-4"
             >
-              <div className="w-12 h-12 bg-brand-500/10 border border-brand-500/20 flex items-center justify-center flex-shrink-0">
-                <span className="font-display text-brand-400 text-lg">{day.day_number}</span>
+              <div className="w-12 h-12 bg-moxie-400/10 border border-moxie-400/20 flex items-center justify-center flex-shrink-0">
+                <span className="font-display text-moxie-400 text-lg">{day.day_number}</span>
               </div>
               <div className="flex-1 min-w-0">
                 <h4 className="text-cream font-sans font-medium">{day.title}</h4>
@@ -736,7 +736,7 @@ function TrekItineraryManager({ trek, onClose }) {
                 </div>
               </div>
               <div className="flex gap-2 flex-shrink-0">
-                <button onClick={() => startEdit(day)} className="text-xs border border-brand-500/30 text-brand-400 px-3 py-1 hover:bg-brand-500/10 transition-colors">Edit</button>
+                <button onClick={() => startEdit(day)} className="text-xs border border-moxie-400/30 text-moxie-400 px-3 py-1 hover:bg-moxie-400/10 transition-colors">Edit</button>
                 <button onClick={() => remove(day.id)} className="text-xs border border-red-500/30 text-red-400 px-3 py-1 hover:bg-red-500/10 transition-colors">Del</button>
               </div>
             </motion.div>
@@ -815,8 +815,8 @@ function TrekForm({ trek, onSave, onCancel }) {
     }
   }
 
-  const inputCls = 'w-full bg-white/5 border border-white/15 text-cream placeholder-cream/30 px-4 py-2.5 text-sm font-sans focus:outline-none focus:border-brand-500 transition-colors duration-200'
-  const selectCls = 'w-full bg-stone-800 border border-white/15 text-cream px-4 py-2.5 text-sm font-sans focus:outline-none focus:border-brand-500'
+  const inputCls = 'w-full bg-white/5 border border-white/15 text-cream placeholder-cream/30 px-4 py-2.5 text-sm font-sans focus:outline-none focus:border-moxie-400 transition-colors duration-200'
+  const selectCls = 'w-full bg-stone-800 border border-white/15 text-cream px-4 py-2.5 text-sm font-sans focus:outline-none focus:border-moxie-400'
   const labelCls = 'block text-cream/40 text-xs uppercase tracking-wider mb-1.5'
 
   return (
@@ -832,7 +832,7 @@ function TrekForm({ trek, onSave, onCancel }) {
       <form onSubmit={submit} className="space-y-6">
         {/* Basic Info */}
         <div>
-          <p className="text-brand-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Basic Information</p>
+          <p className="text-moxie-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Basic Information</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className={labelCls}>Trek Name *</label>
@@ -885,7 +885,7 @@ function TrekForm({ trek, onSave, onCancel }) {
 
         {/* Duration & Altitude */}
         <div>
-          <p className="text-brand-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Trek Details</p>
+          <p className="text-moxie-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Trek Details</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <label className={labelCls}>Duration (Days) *</label>
@@ -908,7 +908,7 @@ function TrekForm({ trek, onSave, onCancel }) {
 
         {/* Pricing */}
         <div>
-          <p className="text-brand-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Pricing</p>
+          <p className="text-moxie-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Pricing</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className={labelCls}>Price Per Person (₹) *</label>
@@ -923,7 +923,7 @@ function TrekForm({ trek, onSave, onCancel }) {
 
         {/* Media */}
         <div>
-          <p className="text-brand-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Media</p>
+          <p className="text-moxie-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Media</p>
           <div>
             <label className={labelCls}>Cover Image URL *</label>
             <input placeholder="https://images.unsplash.com/..." required value={form.cover_image} onChange={set('cover_image')} className={inputCls} />
@@ -935,7 +935,7 @@ function TrekForm({ trek, onSave, onCancel }) {
 
         {/* Content */}
         <div>
-          <p className="text-brand-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Content</p>
+          <p className="text-moxie-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Content</p>
           <div className="space-y-4">
             <div>
               <label className={labelCls}>Overview / Description *</label>
@@ -960,7 +960,7 @@ function TrekForm({ trek, onSave, onCancel }) {
 
         {/* Flags */}
         <div>
-          <p className="text-brand-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Settings</p>
+          <p className="text-moxie-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Settings</p>
           <div className="flex gap-8">
             <label className="flex items-center gap-3 cursor-pointer">
               <input type="checkbox" checked={form.is_featured} onChange={set('is_featured')} className="w-4 h-4 accent-brand-500" />
@@ -1067,7 +1067,7 @@ function TreksManager() {
                 <td className="px-4 py-3 capitalize">{t.difficulty}</td>
                 <td className="px-4 py-3">
                   <div>₹{Number(t.price_per_person).toLocaleString('en-IN')}</div>
-                  {t.is_featured ? <span className="text-brand-400 text-xs">★ Featured</span> : null}
+                  {t.is_featured ? <span className="text-moxie-400 text-xs">★ Featured</span> : null}
                 </td>
                 <td className="px-4 py-3">
                   <button onClick={() => toggle(t.id, t.is_active)}
@@ -1077,7 +1077,7 @@ function TreksManager() {
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <button onClick={() => handleEdit(t)} className="text-xs border border-brand-500/30 text-brand-400 px-2 py-1 hover:bg-brand-500/10 transition-colors">
+                    <button onClick={() => handleEdit(t)} className="text-xs border border-moxie-400/30 text-moxie-400 px-2 py-1 hover:bg-moxie-400/10 transition-colors">
                       Edit
                     </button>
                     <button onClick={() => setImagesTrek(t)} className="text-xs border border-purple-500/30 text-purple-400 px-2 py-1 hover:bg-purple-500/10 transition-colors">
@@ -1142,7 +1142,7 @@ function EventRegistrationsManager() {
   const statusColor = s => {
     if (s === 'confirmed') return 'bg-forest-500/20 text-forest-300'
     if (s === 'cancelled') return 'bg-red-500/20 text-red-300'
-    return 'bg-brand-500/20 text-brand-300'
+    return 'bg-moxie-400/20 text-moxie-300'
   }
 
   const totalRevenue = filtered
@@ -1169,7 +1169,7 @@ function EventRegistrationsManager() {
           placeholder="Search by name, email, ref, event..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="bg-white/5 border border-white/10 text-cream placeholder-cream/30 px-3 py-2 text-sm focus:outline-none focus:border-brand-500 w-64"
+          className="bg-white/5 border border-white/10 text-cream placeholder-cream/30 px-3 py-2 text-sm focus:outline-none focus:border-moxie-400 w-64"
         />
         <div className="flex gap-2">
           {[
@@ -1179,7 +1179,7 @@ function EventRegistrationsManager() {
             { key: 'cancelled', label: `Cancelled (${regs.filter(r => r.status === 'cancelled').length})` },
           ].map(f => (
             <button key={f.key} onClick={() => setFilter(f.key)}
-              className={`px-3 py-1.5 text-xs uppercase tracking-wider border transition-all ${filter === f.key ? 'bg-brand-500 border-brand-500 text-white' : 'border-white/10 text-cream/50 hover:text-cream hover:border-white/30'}`}>
+              className={`px-3 py-1.5 text-xs uppercase tracking-wider border transition-all ${filter === f.key ? 'bg-moxie-400 border-moxie-400 text-white' : 'border-white/10 text-cream/50 hover:text-cream hover:border-white/30'}`}>
               {f.label}
             </button>
           ))}
@@ -1226,7 +1226,7 @@ function EventRegistrationsManager() {
                     <select
                       value={r.status}
                       onChange={e => updateStatus(r.id, e.target.value)}
-                      className="bg-stone-800 border border-white/10 text-cream text-xs px-2 py-1 focus:outline-none focus:border-brand-500"
+                      className="bg-stone-800 border border-white/10 text-cream text-xs px-2 py-1 focus:outline-none focus:border-moxie-400"
                     >
                       <option value="pending">Pending</option>
                       <option value="confirmed">Confirm</option>
@@ -1303,8 +1303,8 @@ function EventForm({ event, onSave, onCancel }) {
     }
   }
 
-  const inputCls = 'w-full bg-white/5 border border-white/15 text-cream placeholder-cream/30 px-4 py-2.5 text-sm font-sans focus:outline-none focus:border-brand-500 transition-colors duration-200'
-  const selectCls = 'w-full bg-stone-800 border border-white/15 text-cream px-4 py-2.5 text-sm font-sans focus:outline-none focus:border-brand-500'
+  const inputCls = 'w-full bg-white/5 border border-white/15 text-cream placeholder-cream/30 px-4 py-2.5 text-sm font-sans focus:outline-none focus:border-moxie-400 transition-colors duration-200'
+  const selectCls = 'w-full bg-stone-800 border border-white/15 text-cream px-4 py-2.5 text-sm font-sans focus:outline-none focus:border-moxie-400'
   const labelCls = 'block text-cream/40 text-xs uppercase tracking-wider mb-1.5'
 
   return (
@@ -1320,7 +1320,7 @@ function EventForm({ event, onSave, onCancel }) {
       <form onSubmit={submit} className="space-y-6">
         {/* Basic Info */}
         <div>
-          <p className="text-brand-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Basic Information</p>
+          <p className="text-moxie-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Basic Information</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className={labelCls}>Event Name *</label>
@@ -1354,7 +1354,7 @@ function EventForm({ event, onSave, onCancel }) {
 
         {/* Dates */}
         <div>
-          <p className="text-brand-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Dates & Capacity</p>
+          <p className="text-moxie-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Dates & Capacity</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <label className={labelCls}>Start Date *</label>
@@ -1377,7 +1377,7 @@ function EventForm({ event, onSave, onCancel }) {
 
         {/* Media */}
         <div>
-          <p className="text-brand-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Media</p>
+          <p className="text-moxie-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Media</p>
           <div>
             <label className={labelCls}>Cover Image URL</label>
             <input placeholder="https://images.unsplash.com/..." value={form.cover_image} onChange={set('cover_image')} className={inputCls} />
@@ -1389,7 +1389,7 @@ function EventForm({ event, onSave, onCancel }) {
 
         {/* Description */}
         <div>
-          <p className="text-brand-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Description</p>
+          <p className="text-moxie-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Description</p>
           <div>
             <label className={labelCls}>Event Description</label>
             <textarea placeholder="Describe the event in detail..." value={form.description} onChange={set('description')} rows={5} className={inputCls + ' resize-none'} />
@@ -1398,7 +1398,7 @@ function EventForm({ event, onSave, onCancel }) {
 
         {/* Settings */}
         <div>
-          <p className="text-brand-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Settings</p>
+          <p className="text-moxie-400 text-xs uppercase tracking-widest mb-4 pb-2 border-b border-white/5">Settings</p>
           <div className="flex gap-8">
             <label className="flex items-center gap-3 cursor-pointer">
               <input type="checkbox" checked={form.is_featured} onChange={set('is_featured')} className="w-4 h-4 accent-brand-500" />
@@ -1504,7 +1504,7 @@ function EventsManager() {
           { key: 'hidden', label: `Hidden (${events.filter(e => !e.is_active).length})` },
         ].map(f => (
           <button key={f.key} onClick={() => setFilter(f.key)}
-            className={`px-4 py-1.5 text-xs uppercase tracking-wider border transition-all ${filter === f.key ? 'bg-brand-500 border-brand-500 text-white' : 'border-white/10 text-cream/50 hover:text-cream hover:border-white/30'}`}>
+            className={`px-4 py-1.5 text-xs uppercase tracking-wider border transition-all ${filter === f.key ? 'bg-moxie-400 border-moxie-400 text-white' : 'border-white/10 text-cream/50 hover:text-cream hover:border-white/30'}`}>
             {f.label}
           </button>
         ))}
@@ -1537,12 +1537,12 @@ function EventsManager() {
                 <td className="px-4 py-3">
                   <div className="text-cream/70 text-xs">{ev.registered_count} / {ev.max_participants}</div>
                   <div className="w-full bg-white/5 h-1 mt-1 rounded-full overflow-hidden">
-                    <div className="bg-brand-500 h-full rounded-full" style={{ width: `${Math.min(100, (ev.registered_count / ev.max_participants) * 100)}%` }} />
+                    <div className="bg-moxie-400 h-full rounded-full" style={{ width: `${Math.min(100, (ev.registered_count / ev.max_participants) * 100)}%` }} />
                   </div>
                 </td>
                 <td className="px-4 py-3">
                   <button onClick={() => toggleFeatured(ev)}
-                    className={`text-xs px-2 py-0.5 border transition-colors ${ev.is_featured ? 'border-brand-500/40 text-brand-400 bg-brand-500/10' : 'border-white/10 text-cream/30 hover:text-brand-400 hover:border-brand-500/30'}`}>
+                    className={`text-xs px-2 py-0.5 border transition-colors ${ev.is_featured ? 'border-moxie-400/40 text-moxie-400 bg-moxie-400/10' : 'border-white/10 text-cream/30 hover:text-moxie-400 hover:border-moxie-400/30'}`}>
                     {ev.is_featured ? '★ Yes' : '☆ No'}
                   </button>
                 </td>
@@ -1554,7 +1554,7 @@ function EventsManager() {
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
-                    <button onClick={() => handleEdit(ev)} className="text-xs border border-brand-500/30 text-brand-400 px-2 py-1 hover:bg-brand-500/10 transition-colors">
+                    <button onClick={() => handleEdit(ev)} className="text-xs border border-moxie-400/30 text-moxie-400 px-2 py-1 hover:bg-moxie-400/10 transition-colors">
                       Edit
                     </button>
                     <Link to={`/events/${ev.slug}`} target="_blank" className="text-xs border border-white/10 text-cream/40 px-2 py-1 hover:text-cream transition-colors">
@@ -1586,7 +1586,7 @@ function AdminGuard({ children }) {
   const { admin, loading } = useAuth()
   const navigate = useNavigate()
   useEffect(() => { if (!loading && !admin) navigate('/admin/login') }, [admin, loading])
-  if (loading || !admin) return <div className="min-h-screen bg-stone-950 flex items-center justify-center"><div className="w-8 h-8 border border-brand-500/30 border-t-brand-500 rounded-full animate-spin" /></div>
+  if (loading || !admin) return <div className="min-h-screen bg-stone-950 flex items-center justify-center"><div className="w-8 h-8 border border-moxie-400/30 border-t-brand-500 rounded-full animate-spin" /></div>
   return children
 }
 

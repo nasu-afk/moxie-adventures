@@ -4,36 +4,68 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Primary brand green — from Moxie business card
         brand: {
-          50: '#fdf6ee',
-          100: '#f8e8cc',
-          200: '#f0ce95',
-          300: '#e6ae57',
-          400: '#dc9230',
-          500: '#c87820',
-          600: '#a85e1a',
-          700: '#874618',
-          800: '#6e381a',
-          900: '#5c2f18',
-          DEFAULT: '#c87820'
+          50: '#f2f9f2',
+          100: '#e0f2e1',
+          200: '#c2e5c4',
+          300: '#8fcf93',
+          400: '#5db562',
+          500: '#3d9e43',
+          600: '#2d8033',
+          700: '#276630',
+          800: '#23512a',
+          900: '#1e4325',
+          DEFAULT: '#4DB6AC'
         },
-        forest: {
-          50: '#f0f7f0',
-          100: '#dceedd',
-          200: '#bcdcbe',
-          300: '#8fc292',
-          400: '#5fa264',
-          500: '#3d8543',
-          600: '#2d6933',
-          700: '#265430',
-          800: '#22432b',
-          900: '#1d3825',
-          DEFAULT: '#3d8543'
+        // Moxie signature teal/mint from logo
+        moxie: {
+          50: '#e8f8f7',
+          100: '#d0f0ee',
+          200: '#a3e2de',
+          300: '#6dcfc9',
+          400: '#4DB6AC',
+          500: '#3a9e94',
+          600: '#2d7d75',
+          700: '#286660',
+          800: '#24514d',
+          900: '#1f4340',
+          DEFAULT: '#4DB6AC'
+        },
+        // Lime green accent from card background
+        lime: {
+          50: '#f5f9f0',
+          100: '#e8f2de',
+          200: '#d2e6bc',
+          300: '#b0d28f',
+          400: '#8bc34a',
+          500: '#7aad3a',
+          600: '#5d8a2c',
+          700: '#4a6d25',
+          800: '#3c5620',
+          900: '#33481c',
+          DEFAULT: '#8bc34a'
+        },
+        // Dark backgrounds
+        dark: {
+          50: '#f0f0f0',
+          100: '#d6d6d6',
+          200: '#adadad',
+          300: '#858585',
+          400: '#5c5c5c',
+          500: '#333333',
+          600: '#292929',
+          700: '#1f1f1f',
+          800: '#141414',
+          900: '#0a0a0a',
+          950: '#050505',
+          DEFAULT: '#1A1A1A'
         },
         stone: {
-          950: '#0d0c0a'
+          950: '#0d0d0d'
         },
-        cream: '#f5f0e8',
+        // Off-white with green tint — from card background
+        cream: '#f0f5e8',
         charcoal: '#1a1a1a'
       },
       fontFamily: {
@@ -43,7 +75,6 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'grain': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E\")"
       },
       animation: {
         'fade-up': 'fadeUp 0.7s ease forwards',

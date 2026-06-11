@@ -48,7 +48,7 @@ export default function TreksPage() {
       onClick={() => onSelect(value)}
       className={`px-4 py-2 text-xs uppercase tracking-wider font-sans border transition-all duration-200 ${
         current === value
-          ? 'bg-brand-500 border-brand-500 text-white'
+          ? 'bg-moxie-400 border-moxie-400 text-white'
           : 'border-white/10 text-cream/50 hover:border-white/30 hover:text-cream'
       }`}
     >
@@ -69,7 +69,7 @@ export default function TreksPage() {
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
           <p className="section-tag mb-3">Adventure Awaits</p>
           <h1 className="font-display text-5xl md:text-6xl text-cream font-300">
-            All <span className="italic text-brand-400">Adventures</span>
+            All <span className="italic text-moxie-400">Adventures</span>
           </h1>
         </div>
       </div>

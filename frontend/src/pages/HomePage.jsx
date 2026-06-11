@@ -107,7 +107,7 @@ function HeroSection() {
         >
           Adventure
           <br />
-          <span className="italic text-brand-400">is Calling</span>
+          <span className="italic text-moxie-400">is Calling</span>
         </motion.h1>
 
         <motion.p
@@ -176,7 +176,7 @@ function ActivitiesSection() {
           <p className="section-tag mb-3">What We Offer</p>
           <h2 className="section-title text-4xl md:text-5xl">Our Adventures</h2>
         </div>
-        <Link to="/treks" className="text-brand-400 text-sm uppercase tracking-wider hover:text-brand-300 flex items-center gap-2 transition-colors">
+        <Link to="/treks" className="text-moxie-400 text-sm uppercase tracking-wider hover:text-moxie-300 flex items-center gap-2 transition-colors">
           View All <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </Link>
       </div>
@@ -288,7 +288,7 @@ function EventsSection({ events }) {
             <button onClick={() => setView('list')} className={`btn-ghost text-xs ${view === 'list' ? 'text-cream' : ''}`}>
               List
             </button>
-            <Link to="/events" className="text-brand-400 text-sm uppercase tracking-wider hover:text-brand-300 flex items-center gap-2 transition-colors">
+            <Link to="/events" className="text-moxie-400 text-sm uppercase tracking-wider hover:text-moxie-300 flex items-center gap-2 transition-colors">
               All Events
             </Link>
           </div>
@@ -303,7 +303,7 @@ function EventsSection({ events }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="group border border-white/5 hover:border-brand-500/30 bg-stone-900/50 transition-colors duration-300"
+                className="group border border-white/5 hover:border-moxie-400/30 bg-stone-900/50 transition-colors duration-300"
               >
                 <div className="relative h-52 overflow-hidden">
                   <img
@@ -313,13 +313,13 @@ function EventsSection({ events }) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 to-transparent" />
                   <div className="absolute bottom-4 left-4">
-                    <span className="bg-brand-500 text-white text-xs px-3 py-1 font-sans">
+                    <span className="bg-moxie-400 text-white text-xs px-3 py-1 font-sans">
                       {new Date(ev.event_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </span>
                   </div>
                 </div>
                 <div className="p-5">
-                  <h3 className="font-display text-xl text-cream font-400 mb-2 group-hover:text-brand-300 transition-colors">{ev.name}</h3>
+                  <h3 className="font-display text-xl text-cream font-400 mb-2 group-hover:text-moxie-300 transition-colors">{ev.name}</h3>
                   <div className="flex items-center gap-1 text-cream/50 text-xs mb-4">
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
                     {ev.location}
@@ -344,15 +344,15 @@ function EventsSection({ events }) {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
-                className="flex items-center justify-between gap-6 p-5 border border-white/5 hover:border-brand-500/20 bg-stone-900/30 group transition-colors"
+                className="flex items-center justify-between gap-6 p-5 border border-white/5 hover:border-moxie-400/20 bg-stone-900/30 group transition-colors"
               >
                 <div className="flex items-center gap-6">
                   <div className="w-16 text-center">
-                    <div className="font-display text-2xl text-brand-400">{new Date(ev.event_date).getDate()}</div>
+                    <div className="font-display text-2xl text-moxie-400">{new Date(ev.event_date).getDate()}</div>
                     <div className="text-cream/40 text-xs uppercase">{new Date(ev.event_date).toLocaleString('default', { month: 'short' })}</div>
                   </div>
                   <div>
-                    <h3 className="font-sans text-cream font-500 group-hover:text-brand-300 transition-colors">{ev.name}</h3>
+                    <h3 className="font-sans text-cream font-500 group-hover:text-moxie-300 transition-colors">{ev.name}</h3>
                     <p className="text-cream/50 text-sm">{ev.location}</p>
                   </div>
                 </div>
@@ -378,7 +378,7 @@ function FeaturedTreks({ treks }) {
           <p className="section-tag mb-3">Handpicked for You</p>
           <h2 className="section-title text-4xl md:text-5xl">Featured Treks</h2>
         </div>
-        <Link to="/treks" className="text-brand-400 text-sm uppercase tracking-wider hover:text-brand-300 flex items-center gap-2 transition-colors">
+        <Link to="/treks" className="text-moxie-400 text-sm uppercase tracking-wider hover:text-moxie-300 flex items-center gap-2 transition-colors">
           All Treks <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </Link>
       </div>
@@ -404,7 +404,7 @@ function CommunitySection({ stats }) {
           <p className="section-tag mb-4">The Moxie Community</p>
           <h2 className="section-title text-4xl md:text-6xl max-w-3xl mx-auto">
             Explore Together.<br />
-            <span className="italic text-brand-400">Grow Together.</span>
+            <span className="italic text-moxie-400">Grow Together.</span>
           </h2>
           <p className="text-cream/50 mt-6 max-w-2xl mx-auto font-sans leading-relaxed">
             We're more than an adventure company. We're a community of explorers, dreamers, and seekers who believe the outdoors heals, inspires, and connects us to what truly matters.
@@ -422,7 +422,7 @@ function CommunitySection({ stats }) {
               transition={{ delay: i * 0.1 }}
               className="text-center p-6 border border-white/5 bg-stone-900/30"
             >
-              <div className="font-display text-5xl text-brand-400 font-300 mb-2">
+              <div className="font-display text-5xl text-moxie-400 font-300 mb-2">
                 {stats[s.key] ? Number(stats[s.key]).toLocaleString('en-IN') : '—'}{s.suffix}
               </div>
               <div className="text-cream/50 text-sm tracking-wide">{s.label}</div>
@@ -480,7 +480,7 @@ function TestimonialsSection({ reviews }) {
               transition={{ duration: 0.5 }}
               className="space-y-6"
             >
-              <div className="flex justify-center gap-1 text-brand-400">
+              <div className="flex justify-center gap-1 text-moxie-400">
                 {Array.from({ length: reviews[current]?.rating || 5 }).map((_, i) => (
                   <svg key={i} className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
@@ -493,7 +493,7 @@ function TestimonialsSection({ reviews }) {
               <div>
                 <div className="font-sans text-cream font-500">{reviews[current]?.reviewer_name}</div>
                 {reviews[current]?.title && (
-                  <div className="text-brand-400 text-sm">{reviews[current]?.title}</div>
+                  <div className="text-moxie-400 text-sm">{reviews[current]?.title}</div>
                 )}
               </div>
             </motion.div>
@@ -530,7 +530,7 @@ function GalleryPreview() {
             <p className="section-tag mb-3">Visual Stories</p>
             <h2 className="section-title text-4xl md:text-5xl">Gallery</h2>
           </div>
-          <Link to="/gallery" className="text-brand-400 text-sm uppercase tracking-wider hover:text-brand-300 flex items-center gap-2 transition-colors">
+          <Link to="/gallery" className="text-moxie-400 text-sm uppercase tracking-wider hover:text-moxie-300 flex items-center gap-2 transition-colors">
             View Gallery <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </Link>
         </div>

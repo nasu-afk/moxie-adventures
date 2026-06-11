@@ -77,7 +77,7 @@ export default function GalleryPage() {
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
           <p className="section-tag mb-3">Visual Stories</p>
           <h1 className="font-display text-5xl md:text-6xl text-cream font-300">
-            Our <span className="italic text-brand-400">Gallery</span>
+            Our <span className="italic text-moxie-400">Gallery</span>
           </h1>
         </div>
       </div>
@@ -87,7 +87,7 @@ export default function GalleryPage() {
         <div className="flex flex-wrap gap-2 mb-10 justify-center">
           {CATS.map(c => (
             <button key={c.key} onClick={() => setCat(c.key)}
-              className={`px-5 py-2 text-xs uppercase tracking-wider font-sans border transition-all duration-200 ${cat === c.key ? 'bg-brand-500 border-brand-500 text-white' : 'border-white/10 text-cream/50 hover:border-white/30 hover:text-cream'}`}>
+              className={`px-5 py-2 text-xs uppercase tracking-wider font-sans border transition-all duration-200 ${cat === c.key ? 'bg-moxie-400 border-moxie-400 text-white' : 'border-white/10 text-cream/50 hover:border-white/30 hover:text-cream'}`}>
               {c.label}
             </button>
           ))}

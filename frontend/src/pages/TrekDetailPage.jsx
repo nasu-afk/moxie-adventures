@@ -85,7 +85,7 @@ function BookingForm({ trek }) {
             <div className={
               'w-6 h-6 rounded-full flex items-center justify-center text-xs font-sans transition-all ' +
               (i === stepIndex[step]
-                ? 'bg-brand-500 text-white'
+                ? 'bg-moxie-400 text-white'
                 : i < stepIndex[step]
                   ? 'bg-forest-500 text-white'
                   : 'bg-white/10 text-cream/30')
@@ -178,7 +178,7 @@ function BookingForm({ trek }) {
           <div className="bg-white/5 border border-white/10 p-4 space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-cream/50">Booking Ref</span>
-              <span className="text-brand-400 font-mono text-xs">{state.bookingRef}</span>
+              <span className="text-moxie-400 font-mono text-xs">{state.bookingRef}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-cream/50">Trek</span>
@@ -194,7 +194,7 @@ function BookingForm({ trek }) {
             </div>
             <div className="flex justify-between border-t border-white/10 pt-2">
               <span className="text-cream font-semibold">Total Amount</span>
-              <span className="text-brand-400 font-semibold text-lg">
+              <span className="text-moxie-400 font-semibold text-lg">
                 ₹{Number(total).toLocaleString('en-IN')}
               </span>
             </div>
@@ -235,7 +235,7 @@ function BookingForm({ trek }) {
           <div className="bg-white/5 border border-white/10 p-4 text-sm space-y-2 text-left">
             <div className="flex justify-between">
               <span className="text-cream/50">Booking Ref</span>
-              <span className="text-brand-400 font-mono text-xs">{state.bookingRef}</span>
+              <span className="text-moxie-400 font-mono text-xs">{state.bookingRef}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-cream/50">Payment ID</span>
@@ -285,7 +285,7 @@ export default function TrekDetailPage() {
 
   if (loading) return (
     <div className="min-h-screen pt-20 flex items-center justify-center">
-      <div className="w-10 h-10 border border-brand-500/30 border-t-brand-500 rounded-full animate-spin" />
+      <div className="w-10 h-10 border border-moxie-400/30 border-t-brand-500 rounded-full animate-spin" />
     </div>
   )
 
@@ -364,7 +364,7 @@ export default function TrekDetailPage() {
                   className={
                     'px-5 py-3 text-xs uppercase tracking-widest font-sans capitalize whitespace-nowrap transition-all border-b-2 -mb-px ' +
                     (activeTab === tab
-                      ? 'border-brand-500 text-brand-400'
+                      ? 'border-moxie-400 text-moxie-400'
                       : 'border-transparent text-cream/50 hover:text-cream')
                   }
                 >
@@ -392,7 +392,7 @@ export default function TrekDetailPage() {
                           transition={{ delay: i * 0.06 }}
                           className="flex items-start gap-3"
                         >
-                          <span className="text-brand-400 mt-1 flex-shrink-0">✦</span>
+                          <span className="text-moxie-400 mt-1 flex-shrink-0">✦</span>
                           <span className="text-cream/70 text-sm font-sans">{h}</span>
                         </motion.li>
                       ))}
@@ -415,7 +415,7 @@ export default function TrekDetailPage() {
                           className="w-full flex items-center justify-between p-5 text-left hover:bg-white/3 transition-colors"
                         >
                           <div className="flex items-center gap-4">
-                            <span className="text-brand-400 font-sans text-sm w-14 flex-shrink-0">
+                            <span className="text-moxie-400 font-sans text-sm w-14 flex-shrink-0">
                               Day {day.day_number}
                             </span>
                             <span className="text-cream font-sans font-medium">{day.title}</span>
@@ -536,7 +536,7 @@ export default function TrekDetailPage() {
                           </div>
                           <div className="flex gap-0.5">
                             {Array.from({ length: rv.rating }).map((_, j) => (
-                              <svg key={j} className="w-4 h-4 text-brand-400" fill="currentColor" viewBox="0 0 20 20">
+                              <svg key={j} className="w-4 h-4 text-moxie-400" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                               </svg>
                             ))}

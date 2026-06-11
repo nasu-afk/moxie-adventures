@@ -36,7 +36,7 @@ export default function ContactPage() {
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
           <p className="section-tag mb-3">Get In Touch</p>
           <h1 className="font-display text-5xl md:text-6xl text-cream font-300">
-            Contact <span className="italic text-brand-400">Us</span>
+            Contact <span className="italic text-moxie-400">Us</span>
           </h1>
         </div>
       </div>
@@ -49,14 +49,14 @@ export default function ContactPage() {
               <p className="section-tag mb-4">Reach Us</p>
               <div className="space-y-4 text-cream/60 text-sm font-sans">
                 <div className="flex items-start gap-3">
-                  <span className="text-brand-400 text-lg mt-0.5">✉</span>
+                  <span className="text-moxie-400 text-lg mt-0.5">✉</span>
                   <div>
                     <div className="text-cream/40 text-xs mb-1">Email</div>
                     <a href="mailto:hello@moxieadventures.com" className="hover:text-cream transition-colors">hello@moxieadventures.com</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-brand-400 text-lg mt-0.5">☎</span>
+                  <span className="text-moxie-400 text-lg mt-0.5">☎</span>
                   <div>
                     <div className="text-cream/40 text-xs mb-1">Phone</div>
                     <a href="tel:+919876543210" className="hover:text-cream transition-colors">+91 98765 43210</a>
@@ -89,7 +89,7 @@ export default function ContactPage() {
                   <a key={s.name} href={s.href} target="_blank" rel="noreferrer"
                     className="flex items-center justify-between text-sm text-cream/50 hover:text-cream transition-colors group">
                     <span>{s.name}</span>
-                    <span className="text-cream/30 group-hover:text-brand-400 transition-colors text-xs">{s.label}</span>
+                    <span className="text-cream/30 group-hover:text-moxie-400 transition-colors text-xs">{s.label}</span>
                   </a>
                 ))}
               </div>

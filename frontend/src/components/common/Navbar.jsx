@@ -42,13 +42,13 @@ export default function Navbar() {
           <Link to="/" className="flex items-center gap-3 group">
             <div className="w-8 h-8 relative">
               <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                <path d="M16 3L3 26H29L16 3Z" stroke="#c87820" strokeWidth="1.5" fill="none"/>
-                <path d="M10 26L16 14L22 26" stroke="#c87820" strokeWidth="1" fill="none" opacity="0.5"/>
+                <path d="M16 3L3 26H29L16 3Z" stroke="#4DB6AC" strokeWidth="1.5" fill="none"/>
+                <path d="M10 26L16 14L22 26" stroke="#4DB6AC" strokeWidth="1" fill="none" opacity="0.5"/>
               </svg>
             </div>
             <div>
               <span className="font-display text-xl font-500 text-cream tracking-wide">Moxie</span>
-              <span className="font-display text-xl font-300 text-brand-400 tracking-wide ml-1.5">Adventures</span>
+              <span className="font-display text-xl font-300 text-moxie-400 tracking-wide ml-1.5">Adventures</span>
             </div>
           </Link>
 
@@ -61,7 +61,7 @@ export default function Navbar() {
                 end={link.to === '/'}
                 className={({ isActive }) =>
                   `px-4 py-2 text-xs tracking-widest uppercase font-sans transition-colors duration-200 ${
-                    isActive ? 'text-brand-400' : 'text-cream/60 hover:text-cream'
+                    isActive ? 'text-moxie-400' : 'text-cream/60 hover:text-cream'
                   }`
                 }
               >
@@ -137,7 +137,7 @@ export default function Navbar() {
                     end={link.to === '/'}
                     className={({ isActive }) =>
                       `block py-4 border-b border-white/5 font-display text-3xl font-300 transition-colors ${
-                        isActive ? 'text-brand-400' : 'text-cream/80 hover:text-cream'
+                        isActive ? 'text-moxie-400' : 'text-cream/80 hover:text-cream'
                       }`
                     }
                   >

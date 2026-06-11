@@ -53,7 +53,7 @@ function ApplyModal({ career, onClose }) {
 }
 
 const TYPE_BADGE = {
-  full_time: { label: 'Full-time', cls: 'bg-brand-500/15 text-brand-300 border-brand-500/30' },
+  full_time: { label: 'Full-time', cls: 'bg-moxie-400/15 text-moxie-300 border-moxie-400/30' },
   part_time: { label: 'Part-time', cls: 'bg-forest-500/15 text-forest-300 border-forest-500/30' },
   internship: { label: 'Internship', cls: 'bg-blue-500/15 text-blue-300 border-blue-500/30' },
   volunteer: { label: 'Volunteer', cls: 'bg-purple-500/15 text-purple-300 border-purple-500/30' },
@@ -77,7 +77,7 @@ export default function CareersPage() {
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
           <p className="section-tag mb-3">Join the Team</p>
           <h1 className="font-display text-5xl md:text-6xl text-cream font-300">
-            Build a Career<br /><span className="italic text-brand-400">with Purpose</span>
+            Build a Career<br /><span className="italic text-moxie-400">with Purpose</span>
           </h1>
         </div>
       </div>
@@ -107,11 +107,11 @@ export default function CareersPage() {
               const badge = TYPE_BADGE[job.type] || TYPE_BADGE.full_time
               return (
                 <motion.div key={job.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                  className="p-6 border border-white/5 hover:border-brand-500/30 bg-stone-900/30 group transition-all duration-300">
+                  className="p-6 border border-white/5 hover:border-moxie-400/30 bg-stone-900/30 group transition-all duration-300">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex flex-wrap items-center gap-3 mb-2">
-                        <h3 className="font-sans text-cream font-500 text-lg group-hover:text-brand-300 transition-colors">{job.title}</h3>
+                        <h3 className="font-sans text-cream font-500 text-lg group-hover:text-moxie-300 transition-colors">{job.title}</h3>
                         <span className={`text-xs px-2.5 py-0.5 border ${badge.cls}`}>{badge.label}</span>
                       </div>
                       <div className="flex flex-wrap gap-4 text-cream/40 text-sm mb-3">

@@ -39,7 +39,7 @@ export default function CampingPage() {
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.9 }}
             className="font-display text-6xl md:text-8xl text-cream font-300 leading-tight mb-6">
-            Wild Camping<br /><span className="italic text-brand-400">Redefined</span>
+            Wild Camping<br /><span className="italic text-moxie-400">Redefined</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="text-cream/60 text-lg max-w-xl mb-8 font-sans leading-relaxed">
             Escape the noise. Find your rhythm in the wilderness. Our curated camping experiences combine comfort, adventure, and a deep connection with nature.
@@ -61,8 +61,8 @@ export default function CampingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {PACKAGES.map((pkg, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="border border-white/10 hover:border-brand-500/40 bg-stone-900/30 p-7 group transition-all duration-300 hover:-translate-y-1">
-                <div className="text-brand-400 text-2xl mb-4">⛺</div>
+                className="border border-white/10 hover:border-moxie-400/40 bg-stone-900/30 p-7 group transition-all duration-300 hover:-translate-y-1">
+                <div className="text-moxie-400 text-2xl mb-4">⛺</div>
                 <h3 className="font-display text-2xl text-cream mb-2">{pkg.title}</h3>
                 <p className="text-cream/50 text-sm font-sans mb-5 leading-relaxed">{pkg.desc}</p>
                 <div className="text-cream/40 text-xs mb-4">⏱ {pkg.duration}</div>
