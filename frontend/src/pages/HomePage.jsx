@@ -181,15 +181,15 @@ function ActivitiesSection() {
         </Link>
       </div>
 
-      {/* Row 1: Trekking (large) + Camping + Stargazing */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
-        {/* Trekking - tall card */}
+      {/* Row 1: Trekking large + Camping + Stargazing */}
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-3 mb-3">
+        {/* Trekking - wider card (takes 2 cols) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="relative group overflow-hidden cursor-pointer md:row-span-2"
-          style={{ height: '400px' }}
+          className="relative group overflow-hidden cursor-pointer md:col-span-2"
+          style={{ height: '300px' }}
         >
           <Link to={ACTIVITIES[0].to} className="block h-full">
             <img src={ACTIVITIES[0].img} alt={ACTIVITIES[0].title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
@@ -207,8 +207,8 @@ function ActivitiesSection() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.08 }}
-          className="relative group overflow-hidden cursor-pointer"
-          style={{ height: '240px' }}
+          className="relative group overflow-hidden cursor-pointer md:col-span-2"
+          style={{ height: '300px' }}
         >
           <Link to={ACTIVITIES[1].to} className="block h-full">
             <img src={ACTIVITIES[1].img} alt={ACTIVITIES[1].title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
@@ -226,21 +226,22 @@ function ActivitiesSection() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.16 }}
-          className="relative group overflow-hidden cursor-pointer"
-          style={{ height: '240px' }}
+          className="relative group overflow-hidden cursor-pointer md:col-span-1"
+          style={{ height: '300px' }}
         >
           <Link to={ACTIVITIES[2].to} className="block h-full">
             <img src={ACTIVITIES[2].img} alt={ACTIVITIES[2].title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
             <div className={`absolute inset-0 bg-gradient-to-t ${ACTIVITIES[2].color} to-transparent`} />
             <div className="absolute inset-0 bg-stone-950/0 group-hover:bg-stone-950/20 transition-colors duration-300" />
             <div className="absolute bottom-0 left-0 p-5">
-              <h3 className="font-display text-2xl text-cream font-light mb-1">{ACTIVITIES[2].title}</h3>
+              <h3 className="font-display text-xl text-cream font-light mb-1">{ACTIVITIES[2].title}</h3>
               <p className="text-cream/60 text-xs font-sans group-hover:text-cream/80 transition-colors">{ACTIVITIES[2].desc}</p>
             </div>
           </Link>
         </motion.div>
       </div>
-      {/* Row 2: Spiritual Yatras + Expeditions + Outdoor Events — equal 3 cols */}
+
+      {/* Row 2: Equal 3 columns */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {ACTIVITIES.slice(3).map((act, i) => (
           <motion.div
@@ -250,7 +251,7 @@ function ActivitiesSection() {
             viewport={{ once: true }}
             transition={{ delay: (i + 3) * 0.08 }}
             className="relative group overflow-hidden cursor-pointer"
-            style={{ height: '240px' }}
+            style={{ height: '280px' }}
           >
             <Link to={act.to} className="block h-full">
               <img src={act.img} alt={act.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
