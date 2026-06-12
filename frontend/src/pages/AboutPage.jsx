@@ -120,21 +120,23 @@ export default function AboutPage() {
             <p className="section-tag mb-3">The People Behind Moxie</p>
             <h2 className="section-title text-4xl md:text-5xl">Our Team</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {(team.length === 0 ? [
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-3xl mx-auto">
+            {(team.length > 0 ? team : [
               {
-                name: 'Krishna Khushwaha', designation: 'Founder',
+                name: 'Krishna Khushwaha',
+                designation: 'Founder',
                 bio: 'Krishna is a passionate adventurer and entrepreneur who founded Moxie Adventures to share his love for the outdoors with the world. With over a decade of trekking experience across the Himalayas and Western Ghats, he brings deep expertise and genuine passion to every expedition.',
                 photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
                 instagram: '#', linkedin: '#'
               },
               {
-                name: 'Hiral Sampat', designation: 'Managing Director',
+                name: 'Hiral Sampat',
+                designation: 'Managing Director',
                 bio: 'Hiral brings her sharp business acumen and love for travel to Moxie Adventures. As Managing Director, she oversees operations, partnerships, and community building, ensuring every adventure is seamless, safe, and unforgettable.',
                 photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400',
                 instagram: '#', linkedin: '#'
               }
-            ] : team).map((member, i) => (
+            ]).slice(0, 2).map((member, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}
                 className="group">
                 <div className="aspect-square overflow-hidden mb-5 relative">
