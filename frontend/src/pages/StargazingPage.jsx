@@ -51,7 +51,7 @@ function StarField() {
 const LOCATIONS = [
   { name: 'Pawna Lake', state: 'Maharashtra', darkness: '★★★★★', altitude: '600m', bestMonths: 'Oct–Mar', img: 'https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=800' },
   { name: 'Igatpuri', state: 'Maharashtra', darkness: '★★★★☆', altitude: '580m', bestMonths: 'Nov–Feb', img: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800' },
-  { name: 'Rajmachi', state: 'Maharashtra', darkness: '★★★★☆', altitude: '900m', bestMonths: 'Oct–Apr', img: 'https://images.unsplash.com/photo-1472905981516-c25eb1ab0b14?w=800' },
+  { name: 'Rajmachi', state: 'Maharashtra', darkness: '★★★★☆', altitude: '900m', bestMonths: 'Oct–Apr', img: 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=800' },
   { name: 'Sandakphu', state: 'West Bengal', darkness: '★★★★★', altitude: '3636m', bestMonths: 'Oct–Dec', img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800' },
 ]
 
@@ -153,6 +153,14 @@ export default function StargazingPage() {
                   <div className="flex justify-between text-xs">
                     <span className="text-white/40">Best Months</span>
                     <span className="text-white">{loc.bestMonths}</span>
+                  </div>
+                  <div className="pt-3 border-t border-white/5">
+                    <Link
+                      to="/events?category=stargazing"
+                      className="w-full flex items-center justify-center gap-2 py-2 text-xs uppercase tracking-wider border border-purple-500/40 text-purple-300 hover:bg-purple-500/10 transition-colors duration-200"
+                    >
+                      Book This Location
+                    </Link>
                   </div>
                 </div>
               </motion.div>
