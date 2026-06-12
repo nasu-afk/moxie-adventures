@@ -47,7 +47,7 @@ export function AdminLogin() {
               {state.loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
-          <p className="text-center mt-6 text-xs text-cream/30">Default: admin@moxieadventures.com / Admin@123</p>
+          
         </div>
         <div className="text-center mt-4"><Link to="/" className="text-cream/30 text-xs hover:text-cream">← Back to website</Link></div>
       </div>
