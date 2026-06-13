@@ -1,22 +1,30 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import api from '../utils/api'
 import { openRazorpay } from '../hooks/useRazorpay'
+import { useAuth } from '../context/AuthContext'
 
 export default function EventDetailPage() {
   const { slug } = useParams()
+  const navigate = useNavigate()
+  const { user } = useAuth()
   const [event, setEvent] = useState(null)
   const [loading, setLoading] = useState(true)
   const [form, setForm] = useState({ name: '', email: '', phone: '', participants: 1 })
   const [state, setState] = useState({ loading: false, error: '', ref: '', paymentId: '' })
-  const [step, setStep] = useState('form') // form | pay | done
+  const [step, setStep] = useState('form')
 
   useEffect(() => {
     api.get('/events/' + slug)
-      .then(res => { if (res.success) setEvent(res.data) })
+      .then(res => {
+        if (res.success) {
+          setEvent(res.data)
+          if (user) setForm(f => ({ ...f, name: user.name || '', email: user.email || '' }))
+        }
+      })
       .finally(() => setLoading(false))
-  }, [slug])
+  }, [slug, user])
 
   const set = k => e => setForm(f => ({ ...f, [k]: e.target.value }))
 
@@ -60,7 +68,7 @@ export default function EventDetailPage() {
 
   if (loading) return (
     <div className="min-h-screen pt-20 flex items-center justify-center">
-      <div className="w-10 h-10 border border-brand-500/30 border-t-brand-500 rounded-full animate-spin" />
+      <div className="w-10 h-10 border border-moxie-400/30 border-t-brand-500 rounded-full animate-spin" />
     </div>
   )
 
@@ -90,7 +98,7 @@ export default function EventDetailPage() {
         <div className="absolute bottom-0 left-0 right-0 max-w-7xl mx-auto px-5 lg:px-8 pb-12">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
             <div className="flex items-center gap-3 mb-3">
-              <span className="bg-brand-500 text-white text-xs px-3 py-1">
+              <span className="bg-moxie-400 text-white text-xs px-3 py-1">
                 {new Date(event.event_date).toLocaleDateString('en-IN', {
                   weekday: 'short', day: 'numeric', month: 'long', year: 'numeric'
                 })}
@@ -151,7 +159,7 @@ export default function EventDetailPage() {
                     <ul className="space-y-3">
                       {h.map((item, i) => (
                         <li key={i} className="flex items-start gap-3 text-cream/70 text-sm font-sans">
-                          <span className="text-brand-400 mt-0.5">✦</span> {item}
+                          <span className="text-moxie-400 mt-0.5">✦</span> {item}
                         </li>
                       ))}
                     </ul>
@@ -177,6 +185,27 @@ export default function EventDetailPage() {
                   <p className="text-red-300 text-xs mt-1">⚠ Only {spotsLeft} spots left!</p>
                 )}
               </div>
+
+              {/* NOT LOGGED IN */}
+              {!user && step === 'form' && !isFull && (
+                <div className="text-center py-4 space-y-4">
+                  <div className="w-14 h-14 bg-moxie-400/10 border border-moxie-400/30 rounded-full flex items-center justify-center mx-auto text-2xl">🔒</div>
+                  <div>
+                    <h3 className="font-display text-xl text-cream mb-1">Sign in to Register</h3>
+                    <p className="text-cream/50 text-sm">Please log in to register for this event</p>
+                  </div>
+                  <button
+                    onClick={() => navigate('/login', { state: { from: window.location.pathname } })}
+                    className="btn-primary w-full justify-center"
+                  >
+                    Login to Register
+                  </button>
+                  <p className="text-cream/30 text-xs">
+                    New here?{' '}
+                    <Link to="/register" className="text-moxie-400 hover:text-moxie-300">Create account</Link>
+                  </p>
+                </div>
+              )}
 
               {/* STEP: Done */}
               {step === 'done' && (
@@ -228,7 +257,7 @@ export default function EventDetailPage() {
                     </div>
                     <div className="flex justify-between border-t border-white/10 pt-2">
                       <span className="text-cream font-semibold">Total Amount</span>
-                      <span className="text-brand-400 font-semibold text-lg">
+                      <span className="text-moxie-400 font-semibold text-lg">
                         ₹{Number(total).toLocaleString('en-IN')}
                       </span>
                     </div>
@@ -254,8 +283,8 @@ export default function EventDetailPage() {
                 </div>
               )}
 
-              {/* STEP: Form */}
-              {step === 'form' && (
+              {/* STEP: Form — only if logged in */}
+              {step === 'form' && user && (
                 isFull ? (
                   <div className="bg-red-500/10 border border-red-500/30 text-red-300 p-4 text-sm text-center">
                     This event is fully booked. Contact us to join the waitlist.

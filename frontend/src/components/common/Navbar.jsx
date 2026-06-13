@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from '../../context/AuthContext'
 
@@ -18,6 +18,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { user, logoutUser } = useAuth()
   const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 60)
@@ -26,6 +27,11 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => setMenuOpen(false), [location])
+
+  const handleLogout = () => {
+    logoutUser()
+    navigate('/')
+  }
 
   return (
     <>
@@ -47,8 +53,8 @@ export default function Navbar() {
               </svg>
             </div>
             <div>
-              <span className="font-display text-xl font-500 text-cream tracking-wide">Moxie</span>
-              <span className="font-display text-xl font-300 text-moxie-400 tracking-wide ml-1.5">Adventures</span>
+              <span className="font-display text-xl text-cream tracking-wide">Moxie</span>
+              <span className="font-display text-xl text-moxie-400 tracking-wide ml-1.5 font-light">Adventures</span>
             </div>
           </Link>
 
@@ -75,7 +81,10 @@ export default function Navbar() {
             {user ? (
               <div className="flex items-center gap-3">
                 <span className="text-cream/60 text-sm">{user.name}</span>
-                <button onClick={logoutUser} className="text-cream/40 hover:text-cream text-xs uppercase tracking-wider transition-colors">
+                <button
+                  onClick={handleLogout}
+                  className="text-cream/40 hover:text-cream text-xs uppercase tracking-wider transition-colors"
+                >
                   Logout
                 </button>
               </div>
@@ -95,21 +104,9 @@ export default function Navbar() {
             className="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 text-cream"
             aria-label="Menu"
           >
-            <motion.span
-              animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="block w-6 h-px bg-current"
-            />
-            <motion.span
-              animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.2 }}
-              className="block w-6 h-px bg-current"
-            />
-            <motion.span
-              animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="block w-6 h-px bg-current"
-            />
+            <motion.span animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }} transition={{ duration: 0.3 }} className="block w-6 h-px bg-current" />
+            <motion.span animate={menuOpen ? { opacity: 0 } : { opacity: 1 }} transition={{ duration: 0.2 }} className="block w-6 h-px bg-current" />
+            <motion.span animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }} transition={{ duration: 0.3 }} className="block w-6 h-px bg-current" />
           </button>
         </div>
       </motion.header>
@@ -126,17 +123,12 @@ export default function Navbar() {
           >
             <nav className="flex flex-col gap-1">
               {NAV_LINKS.map((link, i) => (
-                <motion.div
-                  key={link.to}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.07 }}
-                >
+                <motion.div key={link.to} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.07 }}>
                   <NavLink
                     to={link.to}
                     end={link.to === '/'}
                     className={({ isActive }) =>
-                      `block py-4 border-b border-white/5 font-display text-3xl font-300 transition-colors ${
+                      `block py-4 border-b border-white/5 font-display text-3xl font-light transition-colors ${
                         isActive ? 'text-moxie-400' : 'text-cream/80 hover:text-cream'
                       }`
                     }
@@ -147,6 +139,11 @@ export default function Navbar() {
               ))}
             </nav>
             <div className="mt-8 flex flex-col gap-4">
+              {user ? (
+                <button onClick={handleLogout} className="btn-outline justify-center">Logout</button>
+              ) : (
+                <Link to="/login" className="btn-outline justify-center">Login</Link>
+              )}
               <Link to="/treks" className="btn-primary justify-center">Explore Treks</Link>
               <Link to="/events" className="btn-outline justify-center">Upcoming Events</Link>
             </div>

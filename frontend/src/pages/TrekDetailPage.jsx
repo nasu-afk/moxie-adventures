@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import api from '../utils/api'
 import { openRazorpay } from '../hooks/useRazorpay'
+import { useAuth } from '../context/AuthContext'
 
 const DIFFICULTY_CLASS = {
   easy: 'difficulty-easy',
@@ -12,15 +13,50 @@ const DIFFICULTY_CLASS = {
 }
 
 function BookingForm({ trek }) {
+  const { user } = useAuth()
+  const navigate = useNavigate()
   const [form, setForm] = useState({
-    name: '', email: '', phone: '',
+    name: user?.name || '', email: user?.email || '', phone: '',
     participants: 1, trek_date: '', special_requests: ''
   })
   const [state, setState] = useState({ loading: false, error: '', bookingRef: '', paymentId: '' })
-  const [step, setStep] = useState('form') // form | pay | done
+  const [step, setStep] = useState('form')
 
   const set = k => e => setForm(f => ({ ...f, [k]: e.target.value }))
   const total = trek.price_per_person * form.participants
+
+  // If not logged in show login prompt
+  if (!user) {
+    return (
+      <div className="glass border border-white/10 p-6 sticky top-28">
+        <div className="mb-5">
+          <div className="flex items-baseline gap-2">
+            <span className="font-sans text-3xl text-cream font-semibold">
+              ₹{Number(trek.price_per_person).toLocaleString('en-IN')}
+            </span>
+            <span className="text-cream/40 text-sm">/ person</span>
+          </div>
+        </div>
+        <div className="text-center py-6 space-y-4">
+          <div className="w-14 h-14 bg-moxie-400/10 border border-moxie-400/30 rounded-full flex items-center justify-center mx-auto text-2xl">🔒</div>
+          <div>
+            <h3 className="font-display text-xl text-cream mb-1">Sign in to Book</h3>
+            <p className="text-cream/50 text-sm">Please log in to book this trek</p>
+          </div>
+          <button
+            onClick={() => navigate('/login', { state: { from: window.location.pathname } })}
+            className="btn-primary w-full justify-center"
+          >
+            Login to Book
+          </button>
+          <p className="text-cream/30 text-xs">
+            Don't have an account?{' '}
+            <Link to="/register" className="text-moxie-400 hover:text-moxie-300">Sign up free</Link>
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   const submit = async e => {
     e.preventDefault()

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useAuth } from '../context/AuthContext'
 import API_BASE from '../utils/config'
@@ -9,6 +9,10 @@ export function LoginPage() {
   const [state, setState] = useState({ loading: false, error: '' })
   const { loginUser, loginAdmin } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
+
+  // Get the page user came from, default to home
+  const from = location.state?.from || '/'
 
   const set = k => e => setForm(f => ({ ...f, [k]: e.target.value }))
 
@@ -41,7 +45,8 @@ export function LoginPage() {
 
       if (userRes.success) {
         loginUser(userRes)
-        navigate('/')
+        // Redirect back to where they came from
+        navigate(from)
         return
       }
       setState({ loading: false, error: userRes.message || 'Invalid credentials' })
